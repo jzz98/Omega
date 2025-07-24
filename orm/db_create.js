@@ -14,7 +14,7 @@ class CreateDb {
             return console.error(err.message);
           }
         });
-
+          
         db.serialize(() => {
           db.run(`CREATE TABLE IF NOT EXISTS auth (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
