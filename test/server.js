@@ -12,8 +12,8 @@ class MiApp extends Omega {
     @get('/hola')
     async home_post(req, res){
       const sql = new Sqlite()
-      let args = ['name', 'email']
-      const data = await sql.select("*","auth")
+      const data = await sql.select('*','auth')
+      console.log(data)
       return res.json(data)
     }
 
