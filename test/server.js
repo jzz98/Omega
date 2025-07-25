@@ -14,7 +14,6 @@ class MiApp extends Omega {
       const sql = new Sqlite()
       let args = ['name', 'email']
       const data = await sql.select("*","auth")
-      console.log(data)
       return res.json(data)
     }
 

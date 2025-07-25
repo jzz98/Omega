@@ -1,9 +1,11 @@
 export async function getMysqlCredentials(){
     try{
         const fs = await import('fs')
-        let envFile = fs.readFileSync('../../.env', 'utf8')
-        const envVars = {};
+        let envFile = fs.readFileSync('../.env', 'utf8')
 
+        const envVars = {};
+        
+        // to object
         envFile.split('\n').forEach(linea => {
             const lineaLimpia = linea.trim();
             if (lineaLimpia && !lineaLimpia.startsWith('#')) {
@@ -13,7 +15,12 @@ export async function getMysqlCredentials(){
         });    
         return envVars
     }catch(err){
-        console.error(err)
+        if(err.code === 'ENOENT'){
+            return console.log("Archivo .env inexistente")
+        }else{
+            return console.error(err)
+
+        }
     }
 }
 

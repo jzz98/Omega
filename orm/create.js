@@ -1,9 +1,11 @@
-import sqlite3 from 'sqlite3'
-import mysql2 from 'mysql2'
-import { read, readFileSync } from 'fs'
+import { readFileSync } from 'fs'
+import { ConectionDb } from './conection.js';
 
 class CreateDb {
-  create() {
+  constructor() {
+    this.connection = new ConectionDb()
+  }
+  async create() {
     try {
       // read database config
       const type = readFileSync('../.config.db.json', 'utf8');
@@ -11,14 +13,14 @@ class CreateDb {
 
       // create a sqlite database if it is defined in the config
       if (object.type == 'sqlite') {
-
+        let sqlite3 = await import('sqlite3')
         // create the db
-        const db = new sqlite3.Database('../database.db', (err) => {
+        const db = new sqlite3.default.Database('../database.db', (err) => {
           if (err) {
             return console.error(err.message);
           }
         });
-        
+
         // create a default table
         db.serialize(() => {
           db.run(`CREATE TABLE IF NOT EXISTS auth (
@@ -31,10 +33,10 @@ class CreateDb {
             if (err) {
               return console.error(err.message);
             }
-            console.log('Tabla "usuarios" creada.');
+            console.log('**Table auth create');
           });
         });
-        
+
         // close the conection
         db.close((err) => {
           if (err) {
@@ -44,10 +46,28 @@ class CreateDb {
         });
 
       }
-      
 
+      if (object.type == 'mysql') {
+        console.log("ejecutando")
+        const conn = await this.connection.mysql_conection()
+
+        // create db
+        const result = await conn.query(`
+          CREATE TABLE IF NOT EXISTS auth (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(255),
+            email VARCHAR(255) UNIQUE,
+            password TEXT,
+            superuser CHAR(1)
+          );
+        `);
+        
+        console.log("**Table auth crate")
+        await conn.end(); 
+        return result
+      }
     } catch (err) {
-      console.log(err);
+      return console.log(err);
 
     }
 
