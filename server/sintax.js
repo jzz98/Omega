@@ -20,7 +20,6 @@ export class Omega {
 
     }
 
-
     listen(port) {
         this.server.listen(port, () => console.log(`Servidor en puerto ${port}`));
     }

@@ -1,4 +1,5 @@
 import { getMysqlCredentials } from './environment/readEnv.js';
+import mysql from 'mysql2/promise';
 
 export class ConectionDb{
     // return the db conection
@@ -10,7 +11,6 @@ export class ConectionDb{
     }
 
     async mysql_conection(){
-        const mysql = await import('mysql2/promise')
         const credentials = await getMysqlCredentials()
 
         const conection = await mysql.createConnection({
