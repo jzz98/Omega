@@ -1,7 +1,9 @@
 export async function getMysqlCredentials(){
     try{
+        const env = path.resolve(process.cwd(), '.env');
+        
         const fs = await import('fs')
-        let envFile = fs.readFileSync('../.env', 'utf8')
+        let envFile = fs.readFileSync(env, 'utf8')
 
         const envVars = {};
         
