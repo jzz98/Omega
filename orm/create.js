@@ -1,21 +1,26 @@
 import { readFileSync } from 'fs'
 import { ConectionDb } from './conection.js';
+import path from 'path';
 
 class CreateDb {
   constructor() {
     this.connection = new ConectionDb()
+
+    this.config_path = path.resolve(process.cwd(), '.config.db.json');
+    this.sqlite_db = path.resolve(process.cwd(), 'database.db');
   }
+
   async create() {
     try {
       // read database config
-      const type = readFileSync('../.config.db.json', 'utf8');
+      const type = readFileSync(this.config_path, 'utf8');
       const object = JSON.parse(type)
 
       // create a sqlite database if it is defined in the config
       if (object.type == 'sqlite') {
         let sqlite3 = await import('sqlite3')
         // create the db
-        const db = new sqlite3.default.Database('../database.db', (err) => {
+        const db = new sqlite3.default.Database(this.sqlite_db, (err) => {
           if (err) {
             return console.error(err.message);
           }

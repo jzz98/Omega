@@ -1,12 +1,18 @@
 import { getMysqlCredentials } from './environment/readEnv.js';
 import mysql from 'mysql2/promise';
+import path from 'path';
 
 export class ConectionDb{
+    constructor() {
+
+        this.sqlite_db = path.resolve(process.cwd(), 'database.db');
+    }
+
     // return the db conection
     // remove this later
     async sqlite_conection(){
         const sqlite = await import('sqlite3')
-        const db = new sqlite.default.Database('../database.db')
+        const db = new sqlite.default.Database(this.sqlite_db)
         return db;
     }
 
