@@ -92,6 +92,47 @@ export class MySql extends Sqlite {
         }
     }
 
-    
+    async insert(data, table) {
+        try {
+            const db = await this.conection.mysql_conection();
+
+            const keys = Object.keys(data);
+            const values = Object.values(data);
+
+            const columns = keys.join(', ');
+            const placeholders = keys.map(() => '?').join(', '); // genera ?, ?, ? según la cantidad de columnas
+
+            const query = `INSERT INTO ${table} (${columns}) VALUES (${placeholders})`;
+
+            const [rows] = await db.execute(query, values);
+            await db.end();
+
+            return rows;
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
+    }
+
+    async select_where_equal(args, table, first, second) {
+        try {
+            const db = await this.conection.mysql_conection()
+
+            // default values
+            const columns = Array.isArray(args) ? args.join(', ') : (args || '*');
+            const tables = typeof table === 'string' ? table : 'auth';
+
+            // SQL query  
+            const query = `SELECT ${columns} FROM ${tables} WHERE ${first} = ?`;
+
+            const [rows] = await db.execute(query, [second])
+            await db.end();
+
+            return rows
+        } catch (err) {
+            return console.error(err)
+        }
+    }
+
 }
 

@@ -14,7 +14,7 @@ class MiApp extends Omega {
   @get('/hola')
   async home_post(req, res) {
     const sql = new MySql()
-    const data = await sql.select('*', 'auth')
+    const data = await sql.select_where_equal('*', 'auth', 'username', 'justin')
     return res.json(data)
   }
 
