@@ -21,5 +21,4 @@ class MiApp extends Omega {
 }
 
 const app = new MiApp();
-
 app.listen(8080);

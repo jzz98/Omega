@@ -1,0 +1,7 @@
+database.db
+.config.db.json
+*.sqbpro
+.env
+*.log
+test/
+node_modules/
