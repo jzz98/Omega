@@ -12,6 +12,7 @@
 
 
 ***Dependencies***
+***Dependencies***
 ```
 {
     "@babel/cli"
@@ -28,7 +29,7 @@ npm i --save-dev @babel/cli @babel/core @babel/plugin-proposal-class-properties 
 
 ```
 ***Server run***
+***Server run***
+```
 npm run build (from the root of the proyect)
 npm run dev
-
-
