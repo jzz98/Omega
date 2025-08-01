@@ -11,7 +11,7 @@
 **-Routes: Creation of routes using decorators.**
 
 
-*** Dependencies ***
+***Dependencies***
 ```
 {
     "@babel/cli"
@@ -22,6 +22,9 @@
 }
 ```
 
-*** Server run ***
+***Server run***
+```
 npm run build (from the root of the proyect)
 npm run dev
+
+```
