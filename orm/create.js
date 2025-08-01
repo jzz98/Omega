@@ -78,6 +78,3 @@ class CreateDb {
 
   }
 }
-
-const instance = new CreateDb();
-instance.create()

@@ -1,10 +1,17 @@
 {
   "name": "omega-js",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "main": "index.js",
   "private": false,
+  "license":"MIT",
+  "keywords": ["framework", "backend", "orm", "database"],
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "start": "node dist/server.js",
+    "dev": "nodemon --watch src --exec \"npm run build && node dist/server.js\""
   },
   "dependencies": {
     "ejs": "^3.1.10",
