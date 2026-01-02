@@ -1,33 +1,71 @@
-##Backend framework for node js still in development
---
-**Omega**
+##Backend micro-framework for node js based on express still in development
+# Omega
 
-***Integrations:***
+Lightweight Node.js mini-framework for simple ORM and server utilities.
 
-**-ORM: with automatic connection to MySQL via .env; and automatic creation of a SQLite database if requested in the configuration file.**
+Overview
+--------
+Omega provides a small set of utilities for building simple servers and lightweight ORM interactions. The repository contains an `orm` helper set, a `server` utilities collection, and example scripts in the `examples/` folder to demonstrate usage.
 
-**-ORM request: simple db requests**
+Quick start
+-----------
+1. Install dependencies (if any) from `package.json`:
 
-**-Routes: Creation of routes using decorators.**
-
-
-***Dependencies***
-```
-{
-    "@babel/cli"
-    "@babel/core"
-    "@babel/plugin-proposal-class-properties"
-    "@babel/plugin-proposal-decorators"
-    "@babel/preset-env"
-}
+```bash
+npm install
 ```
 
-***Install dependencies***
-```
-npm i --save-dev @babel/cli @babel/core @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators @babel/plugin-proposal-decorators
+2. Run the ORM create simple Db example:
 
+```bash
+node orm/create
 ```
-***Server run***
+
+3. Run the example server:
+
+```bash
+node examples/server.js
 ```
-npm run build (from the root of the proyect)
-npm run dev
+
+ES modules
+----------
+This project uses ES modules. `package.json` contains `"type": "module"`, so use `import` syntax when requiring local files. Include the `.js` extension for local imports in Node.js ESM.
+
+Example:
+
+```js
+import './orm/create.js';
+import { startServer } from './examples/server.js';
+```
+
+Project layout
+--------------
+- `index.js` — project entry (if present)
+- `orm/` — ORM-related helpers
+    - `conection.js` — connection helper
+    - `create.js` — script for creating or initializing ORM resources
+    - `environment/readEnv.js` — environment helpers
+    - `requests/requests.js` — ORM requests utilities
+    - `validations/ormState.js` — ORM state validation
+- `server/` — server utilities and templates
+    - `sintax.js` — server syntax helper
+    - `functions/decorators.js` — server decorator helpers
+    - `functions/templates.js` — template helpers
+    - `properties/view_engine.js` — view engine helper
+- `examples/` — example usage scripts: `orm.js`, `server.js`
+
+Documentation
+-------------
+More detailed usage and API documentation is available in the `docs/` folder:
+
+- [docs/USAGE.md](docs/USAGE.md)
+- [docs/API.md](docs/API.md)
+- [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)
+
+Contributing
+------------
+See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for contributor guidelines and development tips.
+
+License
+-------
+See the `LICENCE` file in the project root.
