@@ -38,7 +38,7 @@ export class Sqlite {
         const placeholders = keys.map(() => '?').join(', ')
         const columns = keys.join(', ')
         const query = `INSERT INTO ${table} (${columns}) VALUES (${placeholders})`
-
+        
         return new Promise((resolve, reject) => {
             db.run(query, values, function (err) {
                 if (err) return reject(err)
@@ -73,6 +73,7 @@ export class Sqlite {
 
 }
 
+// inherits the connection to the DB
 export class MySql extends Sqlite {
     async select(args, table) {
         try {

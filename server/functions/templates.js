@@ -1,7 +1,7 @@
-export function render(res, name, data){
+export function render(response, name, data = {}){
     if(typeof name !== 'string'){
         console.error('error, neeed to be a string')
     }
-    
-    res.render(name)
+
+    return response.render(name, data)
 }

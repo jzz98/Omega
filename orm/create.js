@@ -1,14 +1,15 @@
 import { readFileSync } from 'fs'
+import { isOrmEnable } from './validations/OrmState.js';
 import { ConectionDb } from './conection.js';
 import path from 'path';
 
 class CreateDb {
   constructor() {
     this.connection = new ConectionDb()
-
-    this.config_path = path.resolve(process.cwd(), '.config.db.json');
+    this.config_path = path.resolve(process.cwd(), 'config.db.json');
     this.sqlite_db = path.resolve(process.cwd(), 'database.db');
   }
+
 
   async create() {
     try {
@@ -66,9 +67,9 @@ class CreateDb {
             superuser CHAR(1)
           );
         `);
-        
+
         console.log("**Table auth crate")
-        await conn.end(); 
+        await conn.end();
         return result
       }
     } catch (err) {
@@ -77,4 +78,13 @@ class CreateDb {
     }
 
   }
+
+  run() {
+    isOrmEnable(this.create)
+  }
+
 }
+
+
+const create = new CreateDb();
+create.run()
