@@ -8,6 +8,23 @@ ORM
 - `orm/conection.js` — contains the `ConectionDb` class to create and manage DB or data-source connections.
 - `orm/create.js` — simple script used to initialize or create ORM state/resources. The file is runnable (`node orm/create`).
 - `orm/environment/readEnv.js` — loads environment configuration (env vars, .env fallbacks).
+- `orm/environment/readEnv.js` — exports `getMysqlCredentials()`, a helper that reads a `.env` file in the project root and returns an object with credentials (e.g. `MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DB`).
+
+Example `.env` contents:
+
+```
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PASSWORD=secret
+MYSQL_DB=my_database
+```
+
+Example usage (ESM):
+
+```js
+import { getMysqlCredentials } from './orm/environment/readEnv.js';
+const creds = await getMysqlCredentials();
+```
 - `orm/requests/requests.js` — helper functions to perform ORM queries/requests; intended to be used by higher-level code or examples.
 - `orm/validations/OrmState.js` — exports `isOrmEnable(callback)`, a helper to check whether the ORM is enabled before running create operations.
 

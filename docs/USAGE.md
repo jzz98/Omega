@@ -63,3 +63,25 @@ Example `config.db.json` to enable SQLite:
 	"type": "sqlite"
 }
 ```
+
+Credentials from `.env`
+-----------------------
+The project includes a small helper to load MySQL credentials from a `.env` file: `orm/environment/readEnv.js` exports `getMysqlCredentials()` which returns an object with environment variables parsed from the file.
+
+Expected variables (example `.env`):
+
+```
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PASSWORD=secret
+MYSQL_DB=my_database
+```
+
+Usage (ESM):
+
+```js
+import { getMysqlCredentials } from './orm/environment/readEnv.js';
+
+const creds = await getMysqlCredentials();
+// creds.MYSQL_HOST, creds.MYSQL_USER, creds.MYSQL_PASSWORD, creds.MYSQL_DB
+```
