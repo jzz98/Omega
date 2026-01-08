@@ -1,4 +1,4 @@
-##Backend micro-framework for node js based on express still in development
+## Backend micro-framework for node js based on express still in development
 # Omega
 
 Lightweight Node.js mini-framework for simple ORM and server utilities.
